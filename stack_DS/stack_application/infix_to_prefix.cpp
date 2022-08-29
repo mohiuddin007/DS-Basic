@@ -49,6 +49,7 @@ string infixToPrefix(string chk){
 int prefixEvaluation(string chk){
 
     Stack<int>st;
+    
 
     for(int i= chk.length()-1; i>=0; i--){
         //chk[i] 0 - 9 --> operand
