@@ -3,8 +3,10 @@
 
 using namespace std;
 
+typedef pair <int, int> mytype;
+
 int main () {
-    Queue q;
+    Queue <int> q;
     int n;
     cin>>n;
     for(int i=0; i<n; i++){
