@@ -468,9 +468,9 @@ int main(){
             }
             break;
         case 17:
-            bool cyclStatus;
-            cyclStatus = detectCycle(head);
-            if(cyclStatus){
+            bool cycleStatus;
+            cycleStatus = detectCycle(head);
+            if(cycleStatus){
                 removeCycle(head);
             } else {
                 cout<<"There is no cycle in the list"<<endl;
