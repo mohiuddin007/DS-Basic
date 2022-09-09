@@ -26,13 +26,13 @@ void inOrder(treeNode* root, string &chk){ //left root right
     inOrder(root->rightChild, chk);
 }
 
-void preOrder(treeNode* root, string &chk){ // root left right 
+void preOrderTrav(treeNode* root, string &chk){ // root left right 
     if(root == NULL)
         return;
 
     chk += to_string(root->data);
-    preOrder(root->leftChild, chk);
-    preOrder(root->rightChild, chk);
+    preOrderTrav(root->leftChild, chk);
+    preOrderTrav(root->rightChild, chk);
 }
 
 void postOrder(treeNode* root, string &chk){ //left right root
@@ -116,52 +116,58 @@ int levelOrderTraversal(treeNode *root, string &chk, int k){
     return max;
 }
 
+int searchInOrder (int inOrder[], int current, int start, int end) {
+    for (int i = start; i < end; i++)
+    {   
+        if(inOrder[i] == current){
+            return i;
+        }
+    }
+    return -1;
+}
+
+treeNode* buildTreePreIn(int preOrder[], int inOrder[], int start, int end){
+    static int id = 0;
+    int current = preOrder[id];
+    id++;
+    treeNode* newNode = new treeNode(current);
+    if(start == end){
+        return newNode;
+    }
+    int pos = searchInOrder(inOrder, current, start, end);
+    
+    newNode->leftChild = buildTreePreIn(preOrder, inOrder, start, pos-1);
+    newNode->rightChild = buildTreePreIn(preOrder, inOrder, pos+1, end);
+    return newNode;
+}
+
 int main(){
     int n;
     cin>>n;
-    treeNode* allNodes[n];
+    int preOrder[n], inOrder[n];
     
     for(int i=0; i<n; i++){
-        allNodes[i] = new treeNode(-1);
+        cin>>preOrder[i];
     }
 
     for(int i=0; i<n; i++){
-        int value, left, right;
-        cin>>value >> left >> right;
-        allNodes[i]->data = value;
-        if(left>n-1 || right > n-1){
-            cout<<"invalid index"<<endl;
-            break;
-        }
-        if(left != -1){
-            allNodes[i]->leftChild=allNodes[left];
-        }
-
-        if(right != -1){
-            allNodes[i]->rightChild=allNodes[right];
-        }
+        cin>>inOrder[i];
     }
 
-    printTree(allNodes[0], 0);
-    string inOrderTraversal = "";
-    string preOrderTraversal = "";
-    string postOrderTraversal = "";
-    string levelorderTraversal = "";
-    
-    int maxValAtK = levelOrderTraversal(allNodes[0], levelorderTraversal, 2);
-    inOrder(allNodes[0], inOrderTraversal);
-    preOrder(allNodes[0], preOrderTraversal);
-    postOrder(allNodes[0], postOrderTraversal);
+    treeNode* root = buildTreePreIn(preOrder, inOrder, 0, n-1);
 
-    cout<<"max value at k: " <<maxValAtK<<endl;
-    cout<<"In order Traversal: " << inOrderTraversal <<endl;
-    cout<<"Pre order Traversal: " << preOrderTraversal <<endl;
-    cout<<"Post order Traversal: " << postOrderTraversal <<endl;    
-
+    string chkPre = "";
+    preOrderTrav(root, chkPre);
+    cout<<chkPre<<endl<<endl;
     return 0;
 }
 
 /*
+9
+0 1 3 4 2 5 7 8 6 
+3 1 4 0 7 5 8 3 6
+
+
 9
 0 1 2 
 1 3 4
