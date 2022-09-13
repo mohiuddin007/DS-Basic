@@ -1,3 +1,5 @@
-10
-0 1 3 4 2 5 7 8 6 
-3 1 4 0 7 5 8 3 6
+ int delVal;
+    cin>>delVal;
+    allNodes = deletionBST(allNodes[0], delVal);
+    cout<<"after deletion: ";
+    printTree(allNodes[0], 0);
