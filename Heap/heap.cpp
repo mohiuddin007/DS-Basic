@@ -60,6 +60,7 @@ int main(){
     cout<<"After heapify"<<" ";
     printArray(array, n);
     
+    //heap sort
     cout<<"After heap sort"<<" ";
     heapSort(array, n);
     printArray(array, n);
