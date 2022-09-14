@@ -11,3 +11,7 @@
 ## Queue
 
 ## Tree
+
+## Priority Queue
+
+## Heap
