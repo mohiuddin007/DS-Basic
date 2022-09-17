@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+typedef pair<int, int> PAIR;
+
 int main(){
     vector<int> V (3, -1);
 
@@ -44,6 +46,17 @@ int main(){
     }
 
     cout<<endl<<endl;
+
+
+    priority_queue<PAIR, vector<PAIR>, greater<PAIR>> PR;
+    PR.push(make_pair(1, 9));
+    PR.push(make_pair(6, 2));
+    PR.push(make_pair(4, 1));
+
+    while(!PR.empty()){
+        cout<< PR.top().first << " | " << PR.top().second << endl;
+        PR.pop();
+    }
 
     return 0;
 
