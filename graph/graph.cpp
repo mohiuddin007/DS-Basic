@@ -22,11 +22,32 @@ public:
             cout<<" (" << (*i).first << ", " << (*i).second << ")";
         }
     }
+
+    void BFS(int source){
+        vector<bool> visited(V, false);
+        queue<int> Q;
+        visited[source] = true;
+        Q.push(source);
+
+        while(!Q.empty()){
+            int u = Q.front();
+            Q.pop();
+
+            for(auto element: adj[u]){
+                int v = element.first;
+                if(visited[v] != true){
+                    visited[v] = true;
+                    cout<<v<<" ";
+                    Q.push(v);
+                }
+            }
+        }
+    }
 };
 
 int main(){
-    int V, E;
-    cin>>V>>E;
+    int V, E, source;
+    cin>>V>>E>>source;
     Graph g(V);
     for(int i=0; i<E; i++){
         int u, v, w;
@@ -37,11 +58,13 @@ int main(){
         g.printNeighbour(i);
         cout << endl;
     }
+    cout<<endl<<endl;
+    g.BFS(source);
     return 0;
 }
 
 // Bi-directional weighted graph
-// 7 10
+// 7 10 4
 // 0 1 7
 // 0 2 1
 // 0 5 3
