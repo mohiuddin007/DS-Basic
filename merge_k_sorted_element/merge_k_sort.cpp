@@ -26,7 +26,6 @@ int main(){
     {
         PQ.push(make_pair(allValues[i][0], i));
     }
-
     vector<int>ans;
 
     while (!PQ.empty())
