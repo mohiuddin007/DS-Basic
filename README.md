@@ -15,3 +15,7 @@
 ## Priority Queue
 
 ## Heap
+
+## BST
+
+## Hash
